@@ -131,12 +131,6 @@
             GTA VI
           </h2>
 
-          <p
-            class="text-base sm:text-lg mb-4 sm:mb-6 max-w-md mx-auto text-center dark:text-purple-200 text-gray-700"
-          >
-            The next chapter is coming. Prepare for an unprecedented journey.
-          </p>
-
           <!-- Countdown Timer -->
           <div class="w-full max-w-md mx-auto">
             <div
