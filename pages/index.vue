@@ -1,18 +1,18 @@
 <template>
   <div
-    class="min-h-screen max-h-screen flex flex-col bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-purple-950 text-gray-800 dark:text-gray-200 transition-colors duration-300 overflow-hidden relative"
+    class="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 text-gray-800 dark:text-gray-200 transition-colors duration-300 overflow-hidden relative"
   >
     <!-- Progress Border for entire page -->
     <div class="fixed inset-0 pointer-events-none z-50">
       <!-- Top border (left to right) -->
       <div
-        class="absolute top-0 left-0 h-2 bg-gradient-to-r from-pink-500 to-purple-600"
+        class="absolute top-0 left-0 h-1 bg-gradient-to-r from-pink-500 to-purple-600"
         :style="{ width: `${countdownPercentage}%` }"
       ></div>
 
-      <!-- Right border (top to bottom) - Fixed positioning -->
+      <!-- Right border (top to bottom) -->
       <div
-        class="absolute top-0 right-0 w-2 bg-gradient-to-b from-purple-600 to-pink-500"
+        class="absolute top-0 right-0 w-1 bg-gradient-to-b from-purple-600 to-pink-500"
         :style="{
           height:
             countdownPercentage >= 25
@@ -23,7 +23,7 @@
 
       <!-- Bottom border (right to left) -->
       <div
-        class="absolute bottom-0 right-0 h-2 bg-gradient-to-l from-pink-500 to-purple-600"
+        class="absolute bottom-0 right-0 h-1 bg-gradient-to-l from-pink-500 to-purple-600"
         :style="{
           width:
             countdownPercentage >= 50
@@ -34,7 +34,7 @@
 
       <!-- Left border (bottom to top) -->
       <div
-        class="absolute bottom-0 left-0 w-2 bg-gradient-to-t from-purple-600 to-pink-500"
+        class="absolute bottom-0 left-0 w-1 bg-gradient-to-t from-purple-600 to-pink-500"
         :style="{
           height:
             countdownPercentage >= 75
@@ -51,33 +51,35 @@
     <div class="relative z-10 flex flex-col h-screen">
       <!-- Header -->
       <header class="py-4 px-6 flex justify-between items-center">
-        <h1
-          class="text-xl sm:text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
-        >
-          GTA VI
-        </h1>
+        <div class="flex items-center">
+          <div
+            class="w-8 h-8 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center mr-3"
+          >
+            <span class="text-white font-bold text-sm">VI</span>
+          </div>
+          <h1
+            class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
+          >
+            GTA VI Countdown
+          </h1>
+        </div>
 
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-3">
           <!-- Focus Sprint Button -->
           <button
             v-if="!sprintActive"
             @click="toggleSprintOptions"
-            class="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all shadow-glow-sm flex items-center space-x-2"
+            class="text-xs sm:text-sm px-3 py-1.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-md hover:from-pink-600 hover:to-purple-700 transition-all shadow-sm flex items-center space-x-2"
           >
-            <Icon
-              name="heroicons:bolt"
-              class="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white"
-            />
+            <Icon name="heroicons:bolt" class="h-3.5 w-3.5 text-white" />
             <span>Focus Sprint</span>
           </button>
           <div
             v-else
-            class="flex items-center space-x-2 bg-gray-800/40 dark:bg-gray-700/40 px-3 py-1.5 rounded-lg border border-pink-500/30"
+            class="flex items-center space-x-2 bg-gray-800/30 dark:bg-gray-700/30 px-3 py-1.5 rounded-md border border-pink-500/20"
           >
-            <div
-              class="text-xs sm:text-sm font-medium text-pink-400 flex items-center"
-            >
-              <div class="w-3 h-3 mr-1.5 relative">
+            <div class="text-xs font-medium text-pink-400 flex items-center">
+              <div class="w-2.5 h-2.5 mr-1.5 relative">
                 <div
                   class="absolute inset-0 rounded-full bg-pink-500 opacity-75 animate-ping"
                 ></div>
@@ -87,12 +89,9 @@
             </div>
             <button
               @click="endFocusSprint"
-              class="text-xs bg-gradient-to-r from-red-500 to-red-600 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg hover:from-red-600 hover:to-red-700 transition-all shadow-glow-sm flex items-center"
+              class="text-xs bg-gradient-to-r from-red-500 to-red-600 text-white px-2 py-1 rounded-md hover:from-red-600 hover:to-red-700 transition-all shadow-sm flex items-center"
             >
-              <Icon
-                name="heroicons:x-mark"
-                class="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white mr-1"
-              />
+              <Icon name="heroicons:x-mark" class="h-3 w-3 text-white mr-1" />
               <span>End</span>
             </button>
           </div>
@@ -100,18 +99,18 @@
           <!-- Theme Toggle -->
           <button
             @click="toggleColorMode"
-            class="p-2 sm:p-2.5 rounded-full bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 hover:from-gray-300 hover:to-gray-400 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all shadow-glow-sm"
+            class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all shadow-sm"
             aria-label="Toggle color mode"
           >
             <Icon
               v-if="colorMode.value === 'dark'"
               name="heroicons:sun"
-              class="h-4 w-4 sm:h-5 sm:w-5 text-yellow-300"
+              class="h-4 w-4 text-yellow-400"
             />
             <Icon
               v-else
               name="heroicons:moon"
-              class="h-4 w-4 sm:h-5 sm:w-5 text-purple-700"
+              class="h-4 w-4 text-purple-600"
             />
           </button>
         </div>
@@ -121,20 +120,24 @@
       <main class="flex-grow flex flex-col items-center justify-center px-4">
         <!-- GTA VI Countdown Section -->
         <div
-          class="relative rounded-xl shadow-xl p-8 max-w-2xl w-full dark:border-gray-700 backdrop-blur-sm"
+          class="relative rounded-2xl shadow-lg p-8 max-w-2xl w-full backdrop-blur-sm bg-white/50 dark:bg-gray-800/30 border border-gray-200/50 dark:border-gray-700/30"
         >
-          <!-- Progress border container -->
+          <div
+            class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs px-4 py-1 rounded-full"
+          >
+            OFFICIAL COUNTDOWN
+          </div>
 
           <h2
-            class="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-400 to-blue-400 text-center"
+            class="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-center"
           >
             GTA VI
           </h2>
 
           <!-- Countdown Timer -->
-          <div class="w-full max-w-md mx-auto">
+          <div class="w-full max-w-lg mx-auto">
             <div
-              class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-1 mb-4 sm:mb-6 overflow-hidden"
+              class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 mb-6 overflow-hidden"
             >
               <div
                 class="bg-gradient-to-r from-pink-500 to-purple-600 h-1 rounded-full"
@@ -142,8 +145,8 @@
               ></div>
             </div>
 
-            <div class="flex justify-between">
-              <div class="countdown-item">
+            <div class="grid grid-cols-5 gap-2">
+              <div class="countdown-block">
                 <div
                   class="countdown-value text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
                 >
@@ -152,10 +155,10 @@
                 <div
                   class="countdown-label dark:text-purple-300 text-purple-700"
                 >
-                  Months
+                  MONTHS
                 </div>
               </div>
-              <div class="countdown-item">
+              <div class="countdown-block">
                 <div
                   class="countdown-value text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
                 >
@@ -164,10 +167,10 @@
                 <div
                   class="countdown-label dark:text-purple-300 text-purple-700"
                 >
-                  Days
+                  DAYS
                 </div>
               </div>
-              <div class="countdown-item">
+              <div class="countdown-block">
                 <div
                   class="countdown-value text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
                 >
@@ -176,10 +179,10 @@
                 <div
                   class="countdown-label dark:text-purple-300 text-purple-700"
                 >
-                  Hours
+                  HOURS
                 </div>
               </div>
-              <div class="countdown-item">
+              <div class="countdown-block">
                 <div
                   class="countdown-value text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
                 >
@@ -188,10 +191,10 @@
                 <div
                   class="countdown-label dark:text-purple-300 text-purple-700"
                 >
-                  Minutes
+                  MINUTES
                 </div>
               </div>
-              <div class="countdown-item">
+              <div class="countdown-block">
                 <div
                   class="countdown-value text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
                 >
@@ -200,15 +203,21 @@
                 <div
                   class="countdown-label dark:text-purple-300 text-purple-700"
                 >
-                  Seconds
+                  SECONDS
                 </div>
               </div>
+            </div>
+
+            <div
+              class="text-center mt-6 text-sm text-gray-500 dark:text-gray-400"
+            >
+              Release Date: May 26, 2026
             </div>
           </div>
         </div>
 
-        <!-- Focus Sprint Section - Separated from GTA countdown -->
-        <div class="mt-8 w-full max-w-md">
+        <!-- Focus Sprint Section -->
+        <div class="mt-10 w-full max-w-md">
           <div class="text-center mb-4">
             <h3
               class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
@@ -220,12 +229,12 @@
             </p>
           </div>
 
-          <!-- Focus Sprint Next Button -->
+          <!-- Focus Sprint Button -->
           <div class="flex flex-col items-center space-y-4">
             <button
               v-if="!sprintActive"
               @click="toggleSprintOptions"
-              class="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:from-pink-600 hover:to-purple-700 transition-all text-sm sm:text-base shadow-glow overflow-hidden w-full"
+              class="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all text-sm shadow-md overflow-hidden w-full"
             >
               <div
                 class="absolute inset-0 bg-gradient-to-r from-pink-600/20 to-purple-700/20 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -249,7 +258,7 @@
             <button
               v-else
               @click="endFocusSprint"
-              class="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full hover:from-red-600 hover:to-red-700 transition-all text-sm sm:text-base shadow-glow overflow-hidden w-full"
+              class="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all text-sm shadow-md overflow-hidden w-full"
             >
               <div
                 class="absolute inset-0 bg-gradient-to-r from-red-600/20 to-red-700/20 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -279,7 +288,33 @@
       </main>
 
       <!-- Footer -->
-      <footer class="py-3 sm:py-4 px-4 sm:px-6 text-center">
+      <footer class="py-4 px-6 text-center">
+        <div class="flex justify-center space-x-4 mb-2">
+          <a
+            href="https://twitter.com/saarabpreet"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-pink-500 transition-colors"
+          >
+            <Icon name="mdi:twitter" class="h-5 w-5" />
+          </a>
+          <a
+            href="https://github.com/sarabpreet/gta6"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-pink-500 transition-colors"
+          >
+            <Icon name="mdi:github" class="h-5 w-5" />
+          </a>
+          <a
+            href="https://www.youtube.com/watch?v=QdBZY2fkU-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-pink-500 transition-colors"
+          >
+            <Icon name="mdi:youtube" class="h-5 w-5" />
+          </a>
+        </div>
         <div class="text-xs text-gray-500 dark:text-gray-400">
           Built by
           <a
@@ -290,21 +325,6 @@
             >sarabpreet (@saarabpreet)</a
           >
           •
-          <a
-            href="https://www.youtube.com/watch?v=QdBZY2fkU-0"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-pink-500 hover:text-pink-400 transition-colors"
-            >Watch Trailer</a
-          >
-          •
-          <a
-            href="https://github.com/sarabpreet/gta6"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-pink-500 hover:text-pink-400 transition-colors"
-            >GitHub</a
-          >
         </div>
       </footer>
     </div>
@@ -312,11 +332,11 @@
     <!-- Sprint Options Modal -->
     <div
       v-if="showSprintOptions"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       @click.self="showSprintOptions = false"
     >
       <div
-        class="bg-gradient-to-b from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-xl p-6 max-w-sm w-full border border-gray-200 dark:border-purple-500/20 shadow-glow"
+        class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 max-w-sm w-full border border-gray-200 dark:border-gray-700"
       >
         <h3
           class="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
@@ -352,10 +372,10 @@
     <!-- Sprint Summary Modal -->
     <div
       v-if="showSprintSummary"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
     >
       <div
-        class="bg-gradient-to-b from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-xl p-6 max-w-sm w-full border border-gray-200 dark:border-purple-500/20 shadow-glow"
+        class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 max-w-sm w-full border border-gray-200 dark:border-gray-700"
       >
         <h3
           class="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400"
@@ -379,7 +399,7 @@
         <div class="flex justify-end">
           <button
             @click="closeSprintSummary"
-            class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded hover:from-pink-600 hover:to-purple-700 transition-all shadow-glow-sm"
+            class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded hover:from-pink-600 hover:to-purple-700 transition-all shadow-sm"
           >
             Close
           </button>
